@@ -4,66 +4,71 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.8.0/p5.js"></script>
     <!-- First page background animation -->
     <script src="animatebg.js"></script>
     <script src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.8.0/p5.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <title>Document</title>
 </head>
 <body>
-    <div id="first-page">
-        <h1 class="highlight" style="bottom:0.4em;animation-delay:0.1s;">Qiu<span style="color:#d9d9d9;font-size:0.2em;font-weight:lighter;position:relative;bottom:1.1em;">Web Developer</span></h1>
-        <h1>Dmitri</h1>
+    <div id="loader">
+        <h1>Loading...</h1>
     </div>
-    <div id="main">
-        <h1 id="about">ABOUT</h1>
-        <div class="box" id="abouttext">
-            <p>
-                &emsp;My name is Dmitri Qiu, I'm a self taught
-                full-stack web developer based in Russia. Currently studying in middle school.
-            </p>
+    <div id="wrapper" style="display:none;">
+        <div id="first-page">
+            <h1 class="highlight" style="bottom:0.4em;animation-delay:0.1s;">Qiu<span style="color:#d9d9d9;font-size:0.2em;font-weight:lighter;position:relative;bottom:1.1em;">Web Developer</span></h1>
+            <h1>Dmitri</h1>
         </div>
-        <h1 id="skills">SKILLS</h1>
-        <div class="flex" id="skillsets">
-            <div class="box">
-                <h1>Front end</h1>
-                <ul>
-                    <li><i class="fab fa-html5"></i>HTML</li>
-                    <li><i class="fab fa-css3-alt"></i>CSS</li>
-                    <li><i class="fab fa-js-square"></i>JavaScript</li>
-                    <li><i class="fas fa-cog"></i>p5.js(Processing)</li>
-                </ul>
+        <div id="main">
+            <h1 id="about">ABOUT</h1>
+            <div class="box" id="abouttext">
+                <p>
+                    &emsp;My name is Dmitri Qiu, I'm a self taught
+                    full-stack web developer based in Russia. Currently studying in middle school.
+                </p>
             </div>
-            <div class="box">
-                <h1>Back end</h1>
-                <ul>
-                    <li><i class="fas fa-wifi"></i>Django</li>
-                    <li><i class="fab fa-python"></i>Python</li>
-                    <li><i class="fas fa-database"></i>MySql</li>
-                    <li><i class="fab fa-linux"></i>Linux</li>
-                    <li><i class="fas fa-microchip"></i>Arduino</li>
-                </ul>
+            <h1 id="skills">SKILLS</h1>
+            <div class="flex" id="skillsets">
+                <div class="box">
+                    <h1>Front end</h1>
+                    <ul>
+                        <li><i class="fab fa-html5"></i>HTML</li>
+                        <li><i class="fab fa-css3-alt"></i>CSS</li>
+                        <li><i class="fab fa-js-square"></i>JavaScript</li>
+                        <li><i class="fas fa-cog"></i>p5.js(Processing)</li>
+                    </ul>
+                </div>
+                <div class="box">
+                    <h1>Back end</h1>
+                    <ul>
+                        <li><i class="fas fa-wifi"></i>Django</li>
+                        <li><i class="fab fa-python"></i>Python</li>
+                        <li><i class="fas fa-database"></i>MySql</li>
+                        <li><i class="fab fa-linux"></i>Linux</li>
+                        <li><i class="fas fa-microchip"></i>Arduino</li>
+                    </ul>
+                </div>
+                <div class="box">
+                    <h1>Linguistics</h1>
+                    <ul>
+                        <li>English</li>
+                        <li>Chinese</li>
+                        <li>Russian</li>
+                    </ul>
+                </div>
             </div>
-            <div class="box">
-                <h1>Linguistics</h1>
-                <ul>
-                    <li>English</li>
-                    <li>Chinese</li>
-                    <li>Russian</li>
-                </ul>
+            <h1 id="linksheader">LINKS</h1>
+            <div id="links">
+                <h1><a href="mailto:dmitrimeowsalot@gmail.com">email</a></h1>
+                <br>
+                <h1><a href="https://github.com/laoqiu233" target="_blank">github @laoqiu233</a></h1>
+                <br>
+                <h1><a href="https://twitter.com/dmitriqiu">twitter @dmitriqiu</a></h1>
+                <br>
+                <h1>telegram @dmitriqiu</h1>
             </div>
-        </div>
-        <h1 id="linksheader">LINKS</h1>
-        <div id="links">
-            <h1><a href="mailto:dmitrimeowsalot@gmail.com">email</a></h1>
-            <br>
-            <h1><a href="https://github.com/laoqiu233" target="_blank">github @laoqiu233</a></h1>
-            <br>
-            <h1><a href="https://twitter.com/dmitriqiu">twitter @dmitriqiu</a></h1>
-            <br>
-            <h1>telegram @dmitriqiu~</h1>
         </div>
     </div>
 </body>

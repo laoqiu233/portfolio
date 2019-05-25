@@ -1,11 +1,16 @@
 window.onload = function() {
     console.log("Loaded");
-    let about_heading = document.getElementById("about");
-    let skills_heading = document.getElementById("skills");
-    let links_heading = document.getElementById("linksheader");
-    makeLonger(about_heading);
-    makeLonger(skills_heading);
-    makeLonger(links_heading);
+    setTimeout(() => {
+        let loader = document.getElementById("loader");
+        loader.style.left = "200%";
+        document.getElementById("wrapper").style.display = "block";
+        let about_heading = document.getElementById("about");
+        let skills_heading = document.getElementById("skills");
+        let links_heading = document.getElementById("linksheader");
+        makeLonger(about_heading);
+        makeLonger(skills_heading);
+        makeLonger(links_heading);
+    }, 500);
 }
 
 function makeLonger(elem) {
