@@ -1,17 +1,15 @@
-window.onload = function() {
+document.addEventListener('DOMContentLoaded', function() {
     console.log("Loaded");
-    setTimeout(() => {
-        let loader = document.getElementById("loader");
-        loader.style.left = "200%";
-        document.getElementById("content").style.display = "block";
-        let about_heading = document.getElementById("about");
-        let skills_heading = document.getElementById("skills");
-        let links_heading = document.getElementById("linksheader");
-        makeLonger(about_heading);
-        makeLonger(skills_heading);
-        makeLonger(links_heading);
-    }, 500);
-}
+    let loader = document.getElementById("loader");
+    loader.style.left = "200%";
+    document.getElementById("content").style.display = "block";
+    let about_heading = document.getElementById("about");
+    let skills_heading = document.getElementById("skills");
+    let links_heading = document.getElementById("linksheader");
+    makeLonger(about_heading);
+    makeLonger(skills_heading);
+    makeLonger(links_heading);
+})
 
 function makeLonger(elem) {
     let width = elem.offsetWidth;
