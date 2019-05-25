@@ -1,0 +1,189 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 
+                Roboto, Oxygen, Ubuntu, Cantarell, 
+                'Open Sans', 'Helvetica Neue', sans-serif;
+    color:#d9d9d9;
+    scroll-behavior: smooth;
+}
+
+h1 {
+    font-size: 100px;
+    display: inline-block
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+/* Special */
+
+.highlight {
+    color:#b43fbd;
+    font-weight:bolder;
+}
+
+.box {
+    background: white;
+    padding: 50px;
+    box-shadow: 0 10px 15px 15px rgba(0, 0, 0, 0.068);
+}
+
+.flex {
+    display: -webkit-flex; /* Safari */
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+/* First page */
+
+#first-page {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: black; 
+    overflow: hidden;
+}
+
+#first-page h1 {
+    z-index: 1;
+    position: absolute;
+    left: 0;
+    bottom: 0.1em;
+    font-size: 200px;
+    font-weight: bolder;
+    line-height: 0.8em;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+    animation: floatIn 1.2s cubic-bezier(0.29, 0.04, 0.56, 0.96);
+    animation-fill-mode: backwards;
+    -webkit-transition: all 0.3s cubic-bezier(0.29, 0.04, 0.56, 0.96);
+    -moz-transition: all 0.3s cubic-bezier(0.29, 0.04, 0.56, 0.96);
+    -o-transition: all 0.3s cubic-bezier(0.29, 0.04, 0.56, 0.96);
+    transition: all 0.3s cubic-bezier(0.29, 0.04, 0.56, 0.96);
+}
+
+#first-page h1:hover {
+    left: 50px;
+}
+
+@keyframes floatIn {
+    0% {
+        left: -1000px;
+        opacity: 0;
+    }
+    100% {
+        left: 0;
+        opacity: 1;
+    }
+}
+
+/* Main */
+
+#main {
+    width: 100%;
+    margin-top: 100vh;
+    overflow: hidden;
+}
+
+#main h1 {
+    position: relative;
+    white-space: nowrap;
+}
+
+/* About */
+
+#main #abouttext {
+    margin: 20vh auto;
+    width: 50%;
+    font-size: 50px;
+    font-weight: lighter;
+    text-align: center;
+    color: white;
+    background-image: url("bg.png");
+    background-attachment: fixed;
+}
+
+/* Skills */
+
+#main #skillsets {
+    margin: 20vh auto;
+}
+
+#main #skillsets .box {
+    width: 400px;
+    text-align: center;
+    color: black;
+    margin: 50px 50px;
+}
+
+#main #skillsets .box h1 {
+    font-weight: lighter;
+    font-size: 80px;
+}
+
+#main #skillsets .box ul{
+    font-size: 30px;
+    margin-top: 0.5em;
+}
+
+#main #skillsets .box ul i {
+    margin-right: 0.5em;
+}
+
+/* Links */
+
+#main #links {
+    margin: 20vh auto;
+}
+
+#main #links h1 {
+    display: block;
+    font-weight: lighter;
+    color: black;
+    padding-left: 1em;
+    border-left: 0 solid black;
+    border-right: 0 solid black;
+    -webkit-transition: all 0.2s cubic-bezier(0.29, 0.04, 0.56, 0.96);
+    -moz-transition: all 0.2s cubic-bezier(0.29, 0.04, 0.56, 0.96);
+    -o-transition: all 0.2s cubic-bezier(0.29, 0.04, 0.56, 0.96);
+    transition: all 0.2s cubic-bezier(0.29, 0.04, 0.56, 0.96);
+}
+
+#main #links h1:hover {
+    border-left: 10px solid gray;
+    border-right: 10px solid gray;
+}
+
+#main #links a:hover {
+    color: gray;
+}
+
+/* Responsive */
+
+@media (max-width: 768px) {
+    #first-page h1 {
+        font-size: 100px;
+    }
+    #main h1 {
+        font-size: 50px;
+    }
+    #main #abouttext {
+        font-size: 30px;
+    }
+}
