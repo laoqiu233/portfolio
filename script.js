@@ -1,4 +1,5 @@
 window.onload = function() {
+    console.log("Loaded");
     let about_heading = document.getElementById("about");
     let skills_heading = document.getElementById("skills");
     let links_heading = document.getElementById("linksheader");

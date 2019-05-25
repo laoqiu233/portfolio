@@ -97,7 +97,7 @@ setInterval(function() {
 
 function draw() {
     let offset = 250;
-    console.log(`%cCurrent FPS: %c${frameRate()}`, "color:black;background:red;", "color:white;background:black;")
+    //console.log(`%cCurrent FPS: %c${frameRate()}`, "color:black;background:red;", "color:white;background:black;")
     resizeCanvas(windowWidth,windowHeight);
     // Resize graphic
     if (graphic.width !== width || graphic.height !== height) {
