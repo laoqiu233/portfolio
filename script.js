@@ -1,7 +1,10 @@
-document.addEventListener('DOMContentLoaded', function() {
+window.onload = function() {
     console.log("Loaded");
     let loader = document.getElementById("loader");
     loader.style.left = "200%";
+    setTimeout(()=>{
+        loader.style.display = "none";
+    }, 1000);
     document.getElementById("content").style.display = "block";
     let about_heading = document.getElementById("about");
     let skills_heading = document.getElementById("skills");
@@ -9,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
     makeLonger(about_heading);
     makeLonger(skills_heading);
     makeLonger(links_heading);
-})
+}
 
 function makeLonger(elem) {
     let width = elem.offsetWidth;
