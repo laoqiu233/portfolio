@@ -59,20 +59,43 @@ a {
     top: 0;
     left: 0;
     background: black;
-
     -webkit-transition-duration: 1s;
     -moz-transition-duration: 1s;
     -o-transition-duration: 1s;
     transition-duration: 1s;
 }
 
-#loader h1 {
+#loader #block {
     position: absolute;
-    font-weight: lighter;
-    color: white;
     transform: translate(-50%, -50%);
     top: 50%;
     left: 50%;
+    width: 150px;
+    height: 150px;
+    background: white;
+    animation: loading 1s cubic-bezier(0.29, 0.04, 0.56, 0.96) infinite;
+}
+
+#loader h1 {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    color: black;
+    font-weight: lighter;
+}
+
+@keyframes loading {
+    0% {
+        width: 0px;
+    }
+    50% {
+        width: 500px;
+        height: 150px;
+    }
+    100% {
+        width: 0px;
+    }
 }
 
 /* First page */
