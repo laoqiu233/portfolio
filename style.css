@@ -221,8 +221,8 @@ a {
 }
 
 #main #links h1:hover {
-    border-left: 15px solid #b43fbd;
-    border-right: 15px solid #b43fbd;
+    border-left: 10px solid #b43fbd;
+    border-right: 10px solid #b43fbd;
 }
 
 #main #links a:hover {
@@ -234,8 +234,8 @@ a {
 }
 
 #main #links #githubLink:hover {
-    border-left: 15px solid rgb(36, 41, 46);
-    border-right: 15px solid rgb(36, 41, 46);
+    border-left: 10px solid rgb(36, 41, 46);
+    border-right: 10px solid rgb(36, 41, 46);
 }
 
 #main #links #twitterLink a:hover {
@@ -243,9 +243,10 @@ a {
 }
 
 #main #links #twitterLink:hover {
-    border-left: 15px solid rgb(29, 161, 242);
-    border-right: 15px solid rgb(29, 161, 242);
+    border-left: 10px solid rgb(29, 161, 242);
+    border-right: 10px solid rgb(29, 161, 242);
 }
+
 
 /* Responsive */
 
