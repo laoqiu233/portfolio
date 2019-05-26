@@ -83,7 +83,7 @@ var update_x = 0;
 var update_y = 0;
 var heart;
 var graphic;
-var texts = Array("I make stuff on the internet", "Move your mouse around or something", "sup", "uwu whats dis");
+var texts = Array("I make stuff on the internet", `Move your ${window.innerWidth <= 1024 ? "finger" : "mouse"} around or something`, "sup", "uwu whats dis");
 var original = texts[0];
 
 setInterval(function() {

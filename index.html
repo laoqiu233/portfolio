@@ -10,8 +10,13 @@
 </head>
 <body>
     <div id="loader">
-        <div id="block"></div>
-        <h1>Loading...</h1>
+        <div id="loadanim">
+            <div id="loadblock" style="animation-delay:0s"></div>
+            <div id="loadblock" style="animation-delay:0.2s"></div>
+            <div id="loadblock" style="animation-delay:0.4s"></div>
+            <div id="loadblock" style="animation-delay:0.6s"></div>
+            <div id="loadblock" style="animation-delay:0.8s"></div>
+        </div>
     </div>
     <div id="content">
         <div id="first-page">
@@ -20,7 +25,7 @@
         </div>
         <div id="main">
             <h1 id="about">ABOUT</h1>
-            <div class="box" id="abouttext" style="background:url(bg.png);background-attachment:fixed;background-repeat:no-repeat;background-size:cover;">
+            <div class="box" id="abouttext" style="background:url(bg.png) no-repeat;background-attachment:fixed;background-size:cover;">
                 <p>
                     &emsp;My name is Dmitri Qiu, I'm a self taught
                     full-stack web developer based in Russia. Currently studying in middle school.
@@ -59,18 +64,15 @@
             <h1 id="linksheader">LINKS</h1>
             <div id="links">
                 <h1><a href="mailto:dmitrimeowsalot@gmail.com">email</a></h1>
-                <br>
-                <h1><a href="https://github.com/laoqiu233" target="_blank">github @laoqiu233</a></h1>
-                <br>
-                <h1><a href="https://twitter.com/dmitriqiu">twitter @dmitriqiu</a></h1>
-                <br>
+                <h1 id="githubLink"><a href="https://github.com/laoqiu233" target="_blank">github @laoqiu233</a></h1>
+                <h1 id="twitterLink"><a href="https://twitter.com/dmitriqiu" target="_blank">twitter @dmitriqiu</a></h1>
                 <h1>telegram @dmitriqiu</h1>
             </div>
         </div>
     </div>
     <!-- First page background animation -->
     <script src="animatebg.js"></script>
-    <script src="script.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.8.0/p5.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
