@@ -2,7 +2,6 @@ window.onload = function() {
     console.log("Loaded");
     let loader = document.getElementById("loader");
     loader.style.left = "200%";
-    document.getElementById("main").style.display = "block";
     let about_heading = document.getElementById("about");
     let skills_heading = document.getElementById("skills");
     let links_heading = document.getElementById("linksheader");
