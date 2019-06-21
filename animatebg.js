@@ -1,20 +1,16 @@
-var canvas
-var ylength = 10;
-var length = 20;
-var line_height;
-var line_width;
-
-class stroke_ {
-    constructor(x, y) {
+class _line {
+    constructor(x, y, graphic) {
         this.x = x;
         this.y = y;
         this.x2 = x + 1;
         this.y2 = y + 1;
         this.renderx2 = x;
         this.rendery2 = y;
+        this.graphic = graphic;
     }
 
     render() {
+        // Update line position if animation is not finished
         if (this.renderx2 != this.x2) {
             this.renderx2 += (this.x2 - this.renderx2) * 0.1;
             if (Math.abs(this.x2 - this.renderx2) < 0.01) {
@@ -27,9 +23,10 @@ class stroke_ {
                 this.rendery2 = this.y2;
             }
         }
-        graphic.stroke(Math.min(255, 100 + 155 * 50/dist(this.x * line_width, this.y * line_height, mouseX, mouseY)))
-        graphic.strokeWeight(Math.min(4, 1 + 3 * 50/dist(this.x * line_width, this.y * line_height, mouseX, mouseY)))
-        graphic.line(this.x * line_width, this.y * line_height, this.renderx2 * line_width, this.rendery2 * line_height);
+        // Draw the line
+        this.graphic.stroke(Math.min(255, 100 + 155 * 50/dist(this.x * line_width, this.y * line_height, mouseX, mouseY)))
+        this.graphic.strokeWeight(Math.min(3, 1 + 2 * 50/dist(this.x * line_width, this.y * line_height, mouseX, mouseY)))
+        this.graphic.line(this.x * line_width, this.y * line_height, this.renderx2 * line_width, this.rendery2 * line_height);
     }
 
     update(y, y2) {
@@ -41,184 +38,226 @@ class stroke_ {
     }
 }
 
-function setup() {
+// Init line array
+function initLines(graphic) {
+    let lines = new Array();
+    for (let y = 0; y < line_count_y; y++) {
+        let row = new Array();
+        for (let x = 0; x < line_count_x; x++) {
+            let line = new _line(x,y,graphic);
+            row.push(line);
+        }
+        lines.push(row);
+    }
+    return lines
+}
+
+// Globals
+var header_size = 50;
+var secondary_size = 30;
+var offset = 250;
+// 10PRINT animation
+var line_count_x = 20;
+var line_count_y = 10;
+var line_width;
+var line_height;
+var interval;
+var lines;
+var texts = new Array("I make stuff on the internet", `Move your ${window.innerWidth <= 1024 ? "finger" : "mouse"} around or something`, "sup", "uwu whats dis");
+var display_text = texts[0];
+var update_x = 0;
+var update_y = 0;
+// Resources
+var heart;
+var pixelFont;
+// Canvas and animation stuff
+var graphic;
+var state = 0;
+
+// Load resources
+function preload() {
     pixelFont = loadFont("pixelFont.ttf");
+    heart = loadModel("Love.obj");  
+}
+
+function setup() {
+    // Create the canvas
     canvas = createCanvas(windowWidth, windowHeight, WEBGL);
     canvas.parent("first-page");
+    // Canvas settings
     background(0);
     stroke(100);
     strokeWeight(1);
+    fill(255);
     angleMode(DEGREES);
-    if (windowWidth <= 768) {
-        length = 5;
-        ylength = 5;
-        interval = 50;
-    }
-    line_width = width / length;
-    line_height = height / ylength;
-    heart = loadModel("Love.obj");
+    line_width = width / line_count_x;
+    line_height = height / line_count_y;
+    // Create the graphic for 2d animations
     graphic = createGraphics(windowWidth, windowHeight);
+    // Graphics settings
+    graphic.stroke(100);
+    graphic.strokeWeight(0);
+    graphic.fill(255);
+    graphic.textFont(pixelFont);
+    graphic.textAlign(CENTER, CENTER);
+    lines = initLines(graphic);
+    updateLines();
+    // Responsive
+    adjustSizes();
 }
 
-// Init strokes array
-function initStrokes() {
-    let strokes = Array();
-    for (let y = 0; y < ylength; y++) {
-        let row = Array();
-        for (let x = 0; x < length; x++) {
-            let l = new stroke_(x,y);
-            row.push(l);
-        }
-        strokes.push(row);
-    }
-    return strokes
-}
-
-var pixelFont;
-var state = 0;
-var strokes = initStrokes();
-var interval = 30;
-var last_updated = -interval;
-var update_x = 0;
-var update_y = 0;
-var heart;
-var graphic;
-var texts = Array("I make stuff on the internet", `Move your ${window.innerWidth <= 1024 ? "finger" : "mouse"} around or something`, "sup", "uwu whats dis");
-var original = texts[0];
-
+// Changes state as time goes on
 setInterval(function() {
-    if (state == 1) {
-        state = 0;
-        original = texts[Math.floor(Math.random() * texts.length)];
-    } else{
-        state = 1;
+    state++;
+    if (state >= 2) {state = 0};
+    if (state == 0) {display_text = texts[Math.floor(Math.random() * texts.length)]};
+} , 5000);
+
+// 10PRINT animation update
+function updateLines() {
+    if (state == 0) {
+        if (Math.random() < 0.5) {
+            lines[update_y][update_x].update(update_y, update_y + 1);
+        } else {
+            lines[update_y][update_x].update(update_y + 1, update_y);
+        }
+        update_x++;
+        if (update_x >= line_count_x) {
+            update_x = 0;
+            update_y++;
+        }
+        if (update_y >= line_count_y) {
+            update_y = 0;
+        }
     }
-}, 5000);
+    setTimeout(updateLines, interval);
+}
 
 function draw() {
-    let offset = 250;
-    //console.log(`%cCurrent FPS: %c${frameRate()}`, "color:black;background:red;", "color:white;background:black;")
-    resizeCanvas(windowWidth,windowHeight);
-    // Resize graphic
-    if (graphic.width !== width || graphic.height !== height) {
-        graphic.remove();
-        graphic = createGraphics(windowWidth, windowHeight);
-    }
+    // Clear everything
     background(0);
-    graphic.background(0);
+    graphic.clear();
+    // Choose animation to play
     switch (state) {
+        // 10PRINT
         case 0:
-            translate(-width/2,-height/2)
-            line_height = height / ylength;
-            line_width = width / length;
-            if (millis() - last_updated >= interval) {
-                if (update_y < ylength) {
-                    if (Math.random() > 0.5) {
-                        strokes[update_y][update_x].update(update_y, update_y + 1);
-                    } else {
-                        strokes[update_y][update_x].update(update_y + 1, update_y);
-                    }
-                    last_updated = millis();
-                    update_x++;
-                    if (update_x >= length) {
-                        update_x = 0;
-                        update_y++;
-                    } 
-                } else {
-                    update_y = 0;
-                }
-            }
-            for (let y = 0; y < ylength; y++) {
-                for (let x = 0; x < length; x++) {
-                    strokes[y][x].render();
-                }
-            }
-            let str = original.slice(0, Math.floor(millis() % 10000 / 80));
-            for (let i=0; i < original.length - Math.floor(millis() % 10000 / 80); i++) {
+            // Random characters animation
+            let str = display_text.slice(0, Math.floor(millis() % 10000 / 80));
+            for (let i=0; i < display_text.length - Math.floor(millis() % 10000 / 80); i++) {
                 str += String.fromCharCode(33 + Math.floor(Math.random() * 57));
             }
+            // Draw lines
             graphic.push();
-            graphic.textFont(pixelFont);
-            graphic.textSize(50);
-            if (width < 1330) {
-                graphic.textSize(20);
-            }
-            if (width < 768) {
-                graphic.textSize(10);
-            }
-            graphic.textAlign(CENTER, CENTER);
-            graphic.noStroke();
-            graphic.fill(255);
-            graphic.text(str, graphic.width / 2, graphic.height / 2);
+            lines.forEach(row => {
+                row.forEach(line__ => {
+                    line__.render();
+                })
+            })
+            graphic.pop();
+            // Draw text
+            graphic.textSize(header_size);
+            graphic.text(str, width / 2, height / 2);
+            // Secondary text
+            graphic.textSize(secondary_size);
+            graphic.push();
             graphic.noFill();
             graphic.stroke(255);
             graphic.strokeWeight(1);
-            graphic.textSize(30);
+            // Arrow
+            graphic.line(graphic.width / 2 - 50, graphic.height / 2 + offset + graphic.textSize() + sin(frameCount * 3) * graphic.textSize() * 0.8, graphic.width / 2, graphic.height / 2 + offset + graphic.textSize() + 40 + sin(frameCount * 3) * graphic.textSize() * 0.8);
+            graphic.line(graphic.width / 2 + 50, graphic.height / 2 + offset + graphic.textSize() + sin(frameCount * 3) * graphic.textSize() * 0.8, graphic.width / 2, graphic.height / 2 + offset + graphic.textSize() + 40 + sin(frameCount * 3) * graphic.textSize() * 0.8);
+            // Reponsive text
             if (width < 1330) {
-                graphic.fill(200);
-                graphic.noStroke();
-                graphic.textSize(5);
-                offset = 150;
+                graphic.strokeWeight(0);
+                graphic.fill(255);
             }
-            if (width < 768) {
-                offset = 100;
-            }
-            graphic.text("SCROLL", graphic.width / 2, graphic.height / 2 + offset - graphic.textSize() * 2 + sin(frameCount * 3) * 20);
-            graphic.stroke(200);
-            graphic.line(graphic.width / 2 - 50, graphic.height / 2 + offset + sin(frameCount * 3) * 20, graphic.width / 2, graphic.height / 2 + offset + 40 + sin(frameCount * 3) * 20);
-            graphic.line(graphic.width / 2 + 50, graphic.height / 2 + offset + sin(frameCount * 3) * 20, graphic.width / 2, graphic.height / 2 + offset + 40 + sin(frameCount * 3) * 20);
+            graphic.text("SCROLL", width / 2, height / 2 + offset - graphic.textSize() + sin(frameCount * 3) * graphic.textSize() * 0.8);
             graphic.pop();
+            // Put the graphic on to the canvas
+            translate(-width/2, -height/2);
             image(graphic, 0, 0);
             break;
+        // Heart animation
         case 1:
-            rotateX(map(height / 2 - mouseY, height / 2, -height / 2, 30, -30));
-            rotateY(map(-(width / 2 - mouseX), width / 2, -width / 2, 30, -30));
+            // Camera following mouse
+            rotateX(Math.min(30, Math.max(-30, map(mouseY / height, 0, 1, 30, -30))));
+            rotateY(Math.min(30, Math.max(-30, map(mouseX / width, 0, 1, -30, 30))));
             push();
+            // Light following mouse
             let dirX = (mouseX / width - 0.5) * 2;
             let dirY = (mouseY / height - 0.5) * 2;
-            directionalLight(100, 100, 100, -dirX, -dirY, -1)
+            directionalLight(100, 100, 100, -dirX, -dirY, -1);
+            // Draw heart
             rotateX(180);
             rotateY(sin(frameCount % 90) * 360);
-            scale(5)
-            if (width < 768) {scale(1);}
+            scale(5);
             translate(0, -30);
             model(heart);
             pop();
+            // Draw text
             graphic.push();
-            graphic.clear();
+            graphic.textSize(header_size);
             graphic.noFill();
             graphic.stroke(200);
             graphic.strokeWeight(2);
-            graphic.textAlign(CENTER, CENTER);
-            graphic.textSize(50);
-            graphic.textLeading(80);
-            if (width < 768) {
-                graphic.textSize(10);
-                graphic.strokeWeight(1);
-                graphic.textLeading(20);
-            }
-            graphic.textFont(pixelFont);
-            graphic.text("NOTHING\nMATTERS", graphic.width / 2 + map(noise(millis()), 0, 1, -5, 10), graphic.height / 2 + map(noise(0, millis()), 0, 1, -5, 5));
-            graphic.noFill();
-            graphic.stroke(255);
-            graphic.strokeWeight(1);
-            graphic.textSize(30);
+            // Reponsive text
             if (width < 1330) {
+                graphic.strokeWeight(0);
                 graphic.fill(200);
-                graphic.noStroke();
-                graphic.textSize(5);
-                offset = 150;
             }
-            if (width < 768) {
-                offset = 100;
-            }
-            graphic.text("NOW SCROLL", graphic.width / 2, graphic.height / 2 + offset - graphic.textSize() * 2 + sin(frameCount * 3) * 20);
+            graphic.textLeading(graphic.textSize() * 2);
+            graphic.text("NOTHING\nMATTERS", graphic.width / 2 + map(noise(millis()), 0, 1, -graphic.textSize() * 0.1, graphic.textSize() * 0.1), graphic.height / 2 + map(noise(0, millis()), 0, 1, -graphic.textSize() * 0.1, graphic.textSize() * 0.1));
+            // Secondary text
+            graphic.textSize(secondary_size);
+            graphic.noFill();
             graphic.stroke(200);
-            graphic.line(graphic.width / 2 - 50, graphic.height / 2 + offset + sin(frameCount * 3) * 20, graphic.width / 2, graphic.height / 2 + offset + 40 + sin(frameCount * 3) * 20);
-            graphic.line(graphic.width / 2 + 50, graphic.height / 2 + offset + sin(frameCount * 3) * 20, graphic.width / 2, graphic.height / 2 + offset + 40 + sin(frameCount * 3) * 20);
-            translate(0,0,210);
-            image(graphic, -graphic.width/2, -graphic.height/2);
+            graphic.strokeWeight(1);
+            // Arrow
+            graphic.line(graphic.width / 2 - 50, graphic.height / 2 + offset + graphic.textSize() + sin(frameCount * 3) * graphic.textSize() * 0.8, graphic.width / 2, graphic.height / 2 + offset + graphic.textSize() + 40 + sin(frameCount * 3) * graphic.textSize() * 0.8);
+            graphic.line(graphic.width / 2 + 50, graphic.height / 2 + offset + graphic.textSize() + sin(frameCount * 3) * graphic.textSize() * 0.8, graphic.width / 2, graphic.height / 2 + offset + graphic.textSize() + 40 + sin(frameCount * 3) * graphic.textSize() * 0.8);
+            // Reponsive text
+            if (width < 1330) {
+                graphic.strokeWeight(0);
+                graphic.fill(200);
+            }
+            graphic.text("SCROLL", width / 2, height / 2 + offset - graphic.textSize() + sin(frameCount * 3) * graphic.textSize() * 0.8);
             graphic.pop();
-            break;
+            // Draw image with text
+            translate(0, 0, 210);
+            image(graphic, -graphic.width/2, -graphic.height/2); 
     }
+}
+
+// Responsive
+function adjustSizes() {
+    if (windowWidth <= 768) {
+        header_size = 15;
+        secondary_size = 10;
+        offset = 100;
+        line_count_x = 5;
+        line_count_y = 5;
+        interval = 50;
+    } else if (width < 1330) {
+        header_size = 20;
+        secondary_size = 15;
+        offset = 150;
+        line_count_x = 10;
+        interval = 40;
+    } else {
+        header_size = 50;
+        secondary_size = 30;
+        offset = 250;
+        line_count_x = 20;
+        line_count_y = 10;
+        interval = 30;
+    }
+    line_width = width / line_count_x;
+    line_height = height / line_count_y;
+    texts[1] = `Move your ${window.innerWidth <= 1024 ? "finger" : "mouse"} around or something`;
+}
+
+function windowResized() {
+    resizeCanvas(windowWidth, windowHeight);
+    graphic.resizeCanvas(windowWidth, windowHeight);
+    adjustSizes();
 }
