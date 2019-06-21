@@ -189,7 +189,7 @@ a {
 }
 
 #main #skillsets .box ul{
-    font-size: 30px;
+    font-size: 50px;
     margin-top: 0.5em;
 }
 
@@ -246,17 +246,31 @@ a {
 
 /* Responsive */
 
+@media (max-width: 768px) {
+    h1 {
+        font-size: 50px;
+    }
+    #main #abouttext {
+        font-size: 27px;
+    }
+    #main #skillsets .box h1 {
+        font-size: 50px;
+    }
+    #main #skillsets .box ul {
+        font-size: 27px;
+    }
+    #main #links h1 {
+        font-size: 30px;
+    }
+}
+
 @media (max-width: 1024px) {
     #first-page h1 {
         font-size: 100px;
     }
-    #main h1 {
-        font-size: 50px;
-    }
     #main #abouttext {
         padding: 50px 0;
         width: 100%;
-        font-size: 30px;
         margin: 5vh auto;
     }
     #main #skillsets {
@@ -267,14 +281,9 @@ a {
         padding: 50px 10px;
         margin: 25px 0;
     }
-    #main #skillsets .box h1 {font-size: 50px;}
     #main #links {
         margin: 5vh auto;
     }
-    #main #links h1 {
-        font-size: 30px;
-    }
-
     #loader #loadanim {
         width: 24vw;
         height: 20vw

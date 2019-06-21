@@ -220,7 +220,7 @@ function draw() {
                 graphic.strokeWeight(0);
                 graphic.fill(200);
             }
-            graphic.text("SCROLL", width / 2, height / 2 + offset - graphic.textSize() + sin(frameCount * 3) * graphic.textSize() * 0.8);
+            graphic.text("SO SCROLL", width / 2, height / 2 + offset - graphic.textSize() + sin(frameCount * 3) * graphic.textSize() * 0.8);
             graphic.pop();
             // Draw image with text
             translate(0, 0, 210);
@@ -231,7 +231,7 @@ function draw() {
 // Responsive
 function adjustSizes() {
     if (windowWidth <= 768) {
-        header_size = 15;
+        header_size = 10;
         secondary_size = 10;
         offset = 100;
         line_count_x = 5;
