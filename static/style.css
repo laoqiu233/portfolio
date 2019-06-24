@@ -118,7 +118,6 @@ a {
 }
 
 #first-page h1 {
-    color: #d9d9d9;
     z-index: 1;
     position: absolute;
     left: 0;
@@ -137,6 +136,8 @@ a {
     -o-transition: all 0.3s cubic-bezier(0.29, 0.04, 0.56, 0.96);
     transition: all 0.3s cubic-bezier(0.29, 0.04, 0.56, 0.96);
 }
+
+#first-page :not(.highlight){color: #d9d9d9;}
 
 #first-page h1:hover {
     left: 50px;
