@@ -1,3 +1,4 @@
+"use strict"
 class _line {
     constructor(x, y, graphic) {
         this.x = x;

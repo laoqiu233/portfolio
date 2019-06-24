@@ -1,3 +1,4 @@
+"use strict"
 window.onload = function() {
     console.log("Loaded");
     document.getElementById("loader").style.left = "200%";
