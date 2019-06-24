@@ -77,8 +77,8 @@ var state = 0;
 
 // Load resources
 function preload() {
-    pixelFont = loadFont("pixelFont.ttf");
-    heart = loadModel("Love.obj");  
+    pixelFont = loadFont("static/pixelFont.ttf");
+    heart = loadModel("static/Love.obj");  
 }
 
 function setup() {

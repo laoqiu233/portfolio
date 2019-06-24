@@ -2,12 +2,10 @@
 window.onload = function() {
     console.log("Loaded");
     document.getElementById("loader").style.left = "200%";
-    let about_heading = document.getElementById("about");
-    let skills_heading = document.getElementById("skills");
-    let links_heading = document.getElementById("linksheader");
-    makeLonger(about_heading);
-    makeLonger(skills_heading);
-    makeLonger(links_heading);
+    let headings = document.getElementsByClassName("heading");
+    for (let heading of headings) {
+        makeLonger(heading);
+    }
 };
 
 function makeLonger(elem) {
@@ -22,5 +20,5 @@ function makeLonger(elem) {
         }
     }
     elem.innerHTML = string;
-    elem.style.left = `-${width*0.8}px`;
+    elem.style.left = `-${elem.getElementsByClassName('highlight')[0].offsetLeft - (window.innerWidth < 1024 ? 50 : 100)}px`;
 }
