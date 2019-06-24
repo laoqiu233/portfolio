@@ -86,7 +86,6 @@ const sketch = (p) => {
     }
 
     p.setup = function() {
-        start = p.millis();
         // Create the canvas
         let canvas = p.createCanvas(p.windowWidth, p.windowHeight, p.WEBGL);
         canvas.parent("first-page");
@@ -110,13 +109,17 @@ const sketch = (p) => {
         p.updateLines();
         // Responsive
         p.adjustSizes();
+        start = p.millis();
     }
 
     // Changes state as time goes on
     setInterval(function() {
         state++;
-        if (state >= 2) {state = 0};
-        if (state == 0) {display_text = texts[Math.floor(Math.random() * texts.length)]};
+        if (state >= 2) {state = 0}
+        if (state == 0) {
+            display_text = texts[Math.floor(Math.random() * texts.length)];
+            start = p.millis();
+        }
     } , 5000);
 
     // 10PRINT animation update
