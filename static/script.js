@@ -6,6 +6,7 @@ window.onload = function() {
     for (let heading of headings) {
         makeLonger(heading);
     }
+    myp5 = new p5(sketch)
 };
 
 function makeLonger(elem) {
