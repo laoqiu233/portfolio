@@ -20,6 +20,11 @@ li {
     list-style: none;
 }
 
+p {
+    font-size: 50px;
+    font-weight: lighter;
+}
+
 a {
     text-decoration: none;
     color: black;
@@ -168,8 +173,6 @@ a {
 #main #abouttext {
     margin: 20vh auto;
     width: 50%;
-    font-size: 50px;
-    font-weight: lighter;
     text-align: center;
     color: white;
 }
@@ -248,6 +251,20 @@ a {
     border-right: 10px solid rgb(29, 161, 242);
 }
 
+/* Quotes */
+
+.quotes {
+    width: 100vw;
+    overflow: hidden;
+}
+
+.quote h2 {
+    font-weight: bolder;
+}
+
+.quote h3 {
+    font-weight: normal;
+}
 
 /* Responsive */
 
@@ -255,7 +272,7 @@ a {
     h1 {
         font-size: 50px;
     }
-    #main #abouttext {
+    p {
         font-size: 27px;
     }
     #main #skillsets .box h1 {
