@@ -258,6 +258,16 @@ a {
     overflow: hidden;
 }
 
+.quote .fa-quote-left {
+    float:left;
+    margin-right: 0.5em;
+}
+
+.quote .fa-quote-right {
+    float:right;
+    margin-left: 0.5em;
+}
+
 .quote h2 {
     font-weight: bolder;
 }
